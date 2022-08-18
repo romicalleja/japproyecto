@@ -68,6 +68,7 @@ function showCategoriesList(){
         }
 
         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
+        console.log(htmlContentToAppend)
     }
 }
 
@@ -90,7 +91,9 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(CATEGORIES_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
+            console.log(resultObj)
             currentCategoriesArray = resultObj.data
+            console.log(currentCategoriesArray)
             showCategoriesList()
             //sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
         }
