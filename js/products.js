@@ -31,9 +31,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   getJSONData(CAR_INFO_URL).then(function (resultObj) {
     if (resultObj.status === "ok") {
       console.log(resultObj)
-      productsArray = resultObj.data;
-      console.log(productsArray);
-      productsArray =resultObj.data.products
+      productsArray = resultObj.data.products;
       console.log(resultObj.data.products)
       showProducts(productsArray);
     }
