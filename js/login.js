@@ -3,9 +3,9 @@ var pass = document.getElementById("floatingPassword");
 const redirect = document.getElementById("signin");
 
 function validateForm() {
-  if (validatemail()==false) {
+  if (mail.value.length = 0) {
     return alert("Verifique informacion");
-  } else if (validatepass()==false) {
+  } else if (pass.value.length = 0) {
     return alert("Verifique informacion");
   } else {
     return true
@@ -21,17 +21,3 @@ redirect.addEventListener("click", () => {
   }
 });
 
-function validatemail(){
-  if (mail.value.length >= 1){
-    return true}
-    else{
-    return false
-  }
-  }
-  function validatepass(){
-    if (pass.value.length >= 1){
-      return true}
-      else{
-      return false
-    }
-    }
