@@ -38,3 +38,16 @@ document.addEventListener("DOMContentLoaded", function (e) {
     
   });
 });
+
+function sortAndShowProducts(sortCriteria, productsArray){
+  currentSortCriteria = sortCriteria;
+
+  if(productsArray != undefined){
+      currentCategoriesArray = categoriesArray;
+  }
+  currentCategoriesArray = sortCategories(currentSortCriteria, currentCategoriesArray);
+
+  //Muestro las categorías ordenadas
+  showCategoriesList();
+}
+
