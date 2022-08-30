@@ -1,19 +1,62 @@
 let productsArray = [];
+const ORDER_ASC_BY_NAME = "AZ";
+const ORDER_DESC_BY_NAME = "ZA";
+const ORDER_BY_SOLD_COUNT = "SOLD";
+let currentSortCriteria = undefined;
+let minCount = undefined;
+let maxCount = undefined;
+
+function sortproducts(criteria, array) {
+  let result = [];
+  if (criteria === ORDER_ASC_BY_NAME) {
+    result = array.sort(function (a, b) {
+      if (a.name < b.name) {return -1;}
+      if (a.name > b.name) {return 1;}
+      return 0;
+    });
+  } else if (criteria === ORDER_DESC_BY_NAME) {
+    result = array.sort(function (a, b) {
+      if (a.name > b.name) {return -1;}
+      if (a.name < b.name) {return 1;}
+      return 0;
+    });
+  } else if (criteria === ORDER_BY_SOLD_COUNT) {
+    result = array.sort(function (a, b) {
+      let aCount = parseInt(a.soldCount);
+      let bCount = parseInt(b.soldCount);
+
+      if (aCount > bCount) {return -1;}
+      if (aCount < bCount) {return 1;}
+      return 0;
+    });
+  }
+  return result;
+}
 
 function showProducts() {
   let htmlContentToAppend = "";
 
   for (let i = 0; i < productsArray.length; i++) {
     let product = productsArray[i];
-    htmlContentToAppend +=`
+    if (
+      (minCount == undefined ||
+        (minCount != undefined && parseInt(product.soldCount) >= minCount)) &&
+      (maxCount == undefined ||
+        (maxCount != undefined && parseInt(product.soldCount) <= maxCount))
+    ) {
+      htmlContentToAppend += `
         <div  onclick="setproduct(${product.name})"class="list-group-item list-group-item-action">
             <div class="row">
             <div class="col-3">
-            <img src="${product.image}" alt="${product.description}" class="img-thumbnail">
+            <img src="${product.image}" alt="${
+        product.description
+      }" class="img-thumbnail">
         </div>
         <div class="col">
             <div class="d-flex w-100 justify-content-between">
-                <h4 class="mb-1">${product.name+ " - "+ product.currency+" "+product.cost}</h4>
+                <h4 class="mb-1">${
+                  product.name + " - " + product.currency + " " + product.cost
+                }</h4>
                 <small class="text-muted">${product.soldCount} Vendidos</small>
             </div>
             <p class="mb-1">${product.description}</p>
@@ -21,33 +64,73 @@ function showProducts() {
     </div>
 </div>
 `;
-        document.getElementById("carcontainer").innerHTML = htmlContentToAppend;
-        //console.log(htmlContentToAppend)
+      document.getElementById("prodcontainer").innerHTML = htmlContentToAppend;
+      //console.log(htmlContentToAppend)
+    }
   }
 }
 
-
-document.addEventListener("DOMContentLoaded", function (e) {
-  getJSONData(CAR_INFO_URL).then(function (resultObj) {
-    if (resultObj.status === "ok") {
-      console.log(resultObj)
-      productsArray = resultObj.data.products;
-      console.log(resultObj.data.products)
-      showProducts(productsArray);
-    }
-    
-  });
-});
-
-function sortAndShowProducts(sortCriteria, productsArray){
+function sortAndShowProducts(sortCriteria, productsArray) {
   currentSortCriteria = sortCriteria;
 
-  if(productsArray != undefined){
-      currentCategoriesArray = categoriesArray;
+  if (productsArray != undefined) {
+    productsarray = productsArray;
   }
-  currentCategoriesArray = sortCategories(currentSortCriteria, currentCategoriesArray);
 
-  //Muestro las categorías ordenadas
-  showCategoriesList();
+  productsarray = sortproducts(currentSortCriteria, productsArray);
+
+  showProducts();
 }
 
+document.addEventListener("DOMContentLoaded", function (e) {
+  let prodURL= PRODUCTS_URL + localStorage.getItem("catID") + ".json"
+  getJSONData(prodURL).then(function (resultObj) {
+    if (resultObj.status === "ok") {
+      console.log(resultObj);
+      productsArray = resultObj.data.products;
+      console.log(resultObj.data.products);
+      showProducts(productsArray);
+    }
+  });
+  document.getElementById("sortAsc").addEventListener("click", function () {
+    sortAndShowProducts(ORDER_ASC_BY_NAME);
+  });
+
+  document.getElementById("sortDesc").addEventListener("click", function () {
+    sortAndShowProducts(ORDER_DESC_BY_NAME);
+  });
+
+  document.getElementById("sortByCount").addEventListener("click", function () {
+    sortAndShowProducts(ORDER_BY_SOLD_COUNT);
+  });
+
+  document.getElementById("clearRangeFilter").addEventListener("click", function () {
+      document.getElementById("rangeFilterCountMin").value = "";
+      document.getElementById("rangeFilterCountMax").value = "";
+
+      minCount = undefined;
+      maxCount = undefined;
+
+      showProducts();
+    });
+
+  document
+    .getElementById("rangeFilterCount").addEventListener("click", function () {
+      minCount = document.getElementById("rangeFilterCountMin").value;
+      maxCount = document.getElementById("rangeFilterCountMax").value;
+
+      if (minCount != undefined && minCount != "" && parseInt(minCount) >= 0) {
+        minCount = parseInt(minCount);
+      } else {
+        minCount = undefined;
+      }
+
+      if (maxCount != undefined && maxCount != "" && parseInt(maxCount) >= 0) {
+        maxCount = parseInt(maxCount);
+      } else {
+        maxCount = undefined;
+      }
+
+      showProducts();
+    });
+});

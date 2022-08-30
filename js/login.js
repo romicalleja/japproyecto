@@ -14,7 +14,7 @@ function validateForm() {
 
 redirect.addEventListener("click", () => {
   if (validateForm()==true){
-    location.href="inicial.html";
+       location.href="inicial.html";
   } 
   else{
  return alert("Verifique informacion");
@@ -23,7 +23,9 @@ redirect.addEventListener("click", () => {
 
 function validatemail(){
   if (mail.value.length >= 1){
-    return true}
+    localStorage.setItem("mail", mail.value)
+    return true
+  }
     else{
     return false
   }
