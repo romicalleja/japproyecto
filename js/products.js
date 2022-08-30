@@ -70,11 +70,11 @@ function showProducts() {
   }
 }
 
-function sortAndShowProducts(sortCriteria, productsArray) {
+function sortAndShowProducts(sortCriteria, curproductsArray) {
   currentSortCriteria = sortCriteria;
 
-  if (productsArray != undefined) {
-    productsarray = productsArray;
+  if (curproductsArray != undefined) {
+    productsarray = curproductsArray;
   }
 
   productsarray = sortproducts(currentSortCriteria, productsArray);
@@ -88,8 +88,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     if (resultObj.status === "ok") {
       console.log(resultObj);
       productsArray = resultObj.data.products;
-      console.log(resultObj.data.products);
-      showProducts(productsArray);
+      console.log(productsArray);
+      showProducts();
     }
   });
   document.getElementById("sortAsc").addEventListener("click", function () {
