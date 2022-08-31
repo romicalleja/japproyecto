@@ -40,9 +40,9 @@ function showProducts() {
     let product = productsArray[i];
     if (
       (minCount == undefined ||
-        (minCount != undefined && parseInt(product.soldCount) >= minCount)) &&
+        (minCount != undefined && parseInt(product.cost) >= minCount)) &&
       (maxCount == undefined ||
-        (maxCount != undefined && parseInt(product.soldCount) <= maxCount))
+        (maxCount != undefined && parseInt(product.cost) <= maxCount))
     ) {
       htmlContentToAppend += `
         <div  onclick="setproduct(${product.name})"class="list-group-item list-group-item-action">
@@ -114,24 +114,29 @@ document.addEventListener("DOMContentLoaded", function (e) {
       showProducts();
     });
 
-  document
-    .getElementById("rangeFilterCount").addEventListener("click", function () {
+  document    .getElementById("rangeFilterCount").addEventListener("click", function () {
       minCount = document.getElementById("rangeFilterCountMin").value;
       maxCount = document.getElementById("rangeFilterCountMax").value;
 
-      if (minCount != undefined && minCount != "" && parseInt(minCount) >= 0) {
+      if ((minCount != undefined) && (minCount != "") && (parseInt(minCount)) >= 0){
         minCount = parseInt(minCount);
-      } else {
+    }
+    else{
         minCount = undefined;
-      }
+    }
 
-      if (maxCount != undefined && maxCount != "" && parseInt(maxCount) >= 0) {
+    if ((maxCount != undefined) && (maxCount != "") && (parseInt(maxCount)) >= 0){
         maxCount = parseInt(maxCount);
-      } else {
+    }
+    else{
         maxCount = undefined;
-      }
-
+    }
+      
       showProducts();
+      
+  document.getElementById("busqueda").addEventListener("onsubmmit", function(){
+        productsArray.filter(document.getElementById("busqueda".input.value))
+      })
     });
   // document.getElementById("busqueda").addEventListener("input", function(){
     
