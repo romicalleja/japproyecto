@@ -3,16 +3,21 @@ var pass = document.getElementById("floatingPassword");
 const redirect = document.getElementById("signin");
 
 function validateForm() {
-  if (validatemail()==false) {
-    return alert("Verifique informacion");
-  } else if (validatepass()==false) {
-    return alert("Verifique informacion");
-  } else {
-    return true
+  let form = document.forms["reg"]["reg"];
+  if (form == "") {
+    alert("Complete la informacion");
+    return false;
   }
-}
+  else{
+    return true;
+  }
+  }
 
-redirect.addEventListener("click", () => {
+
+
+
+addEventListener("submit", () => {
+  event.preventDefault()
   if (validateForm()==true){
        location.href="inicial.html";
   } 
@@ -21,19 +26,3 @@ redirect.addEventListener("click", () => {
   }
 });
 
-function validatemail(){
-  if (mail.value.length >= 1){
-    localStorage.setItem("mail", mail.value)
-    return true
-  }
-    else{
-    return false
-  }
-  }
-  function validatepass(){
-    if (pass.value.length >= 1){
-      return true}
-      else{
-      return false
-    }
-    }

@@ -5,6 +5,13 @@ const ORDER_BY_SOLD_COUNT = "SOLD";
 let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
+const busqueda= document.getElementById("busqueda")
+
+
+function setproductid(id){
+  localStorage.setItem("prodID", id);
+  window.location = "product-info.html"
+}
 
 function sortproducts(criteria, array) {
   let result = [];
@@ -45,7 +52,7 @@ function showProducts() {
         (maxCount != undefined && parseInt(product.cost) <= maxCount))
     ) {
       htmlContentToAppend += `
-        <div  onclick="setproduct(${product.name})"class="list-group-item list-group-item-action">
+        <div  onclick="setproductid(${product.id})"class="list-group-item list-group-item-action">
             <div class="row">
             <div class="col-3">
             <img src="${product.image}" alt="${
@@ -134,12 +141,12 @@ document.addEventListener("DOMContentLoaded", function (e) {
       
       showProducts();
       
-  document.getElementById("busqueda").addEventListener("onsubmmit", function(){
-        productsArray.filter(document.getElementById("busqueda".input.value))
-      })
     });
-  // document.getElementById("busqueda").addEventListener("input", function(){
-    
-  // })
+    busqueda.addEventListener("input", function(e){
+      let value = e.target.value
+      productsArray.forEach(product => {
+        const isVisible = product.name.includes(value) || product.description.includes(value)
+        product.classList.toggle("hide", !isVisible)
+      });
+    })
 });
-// +

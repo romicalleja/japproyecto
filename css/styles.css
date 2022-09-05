@@ -194,3 +194,7 @@ a.custom-card:hover {
  margin-left: 25%;
  margin-right: 25% ;
 }
+
+.hide{
+  display: none;
+}
