@@ -72,7 +72,6 @@ function showProducts() {
 </div>
 `;
       document.getElementById("prodcontainer").innerHTML = htmlContentToAppend;
-      //console.log(htmlContentToAppend)
     }
   }
 }
@@ -142,8 +141,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
       showProducts();
       
     });
-    busqueda.addEventListener("input", function(e){
+    input.addEventListener("input", function(e){
       let value = e.target.value
+      event.preventDefault()
       productsArray.forEach(product => {
         const isVisible = product.name.includes(value) || product.description.includes(value)
         product.classList.toggle("hide", !isVisible)
