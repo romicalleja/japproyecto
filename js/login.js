@@ -9,6 +9,7 @@ function validateForm() {
     return false;
   }
   else{
+    localStorage.setItem("mail", mail.value)
     return true;
   }
   }
