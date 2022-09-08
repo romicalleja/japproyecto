@@ -1,6 +1,7 @@
 let prodinfoarray=[];
 let prodcommentarray= []
 let imgarray= []
+const comentar= document.getElementById("enviarcomentario")
 
 function showproductinfo(){
         let productsInfo= ""
@@ -26,7 +27,7 @@ function showproductinfo(){
         <p class="mb-1">${"Cantidad de Vendidos"+ "<br></br>"+ info.soldCount+" "+"vendidos"}</p>
         <div class="row">
         <div class="col-3">
-        <div img src="${info.images[1]}">
+        <div img src="${info.images[0].src}">
          
         </div>
     </div>
@@ -45,40 +46,35 @@ function showcomments(){
         let coment= prodcommentarray[i]
         {
             coments+=`
-            <div class="list-group-item list-group-item-action">
-            <div class="row">
-            <div class="col-3">
             <div>
-            <div class="col">
-            <div class="d-flex w-100 justify-content-between">
-                <h4 class="mb-1">${
-                  coment.user + " " + coment.score}</h4>
-                <small class="text-muted">${coment.dateTime}</small>
-            </div>
+            <div class="row">
+            <div>
+                <p class="bold">${coment.user}
+                <small class="text-muted">${coment.dateTime}</small> </p>
+                <p>${coment.score}</p>
             <p class="mb-1">${coment.description}</p>
         </div>
-      
-    </div>
+       </div>
 </div>
 `;
             document.getElementById("comentcontainer").innerHTML=coments;
         }
     }
 }
-// function showpics(){
-// let pics=""
-// for(let i= 0; i < imgarray.length;i++){
-//     let pic= imgarray[i]
-//     {
-//         pics+=`
-//         <div img src="${pic[1]}">
+function showpics(){
+let pics=""
+for(let i= 0; i < imgarray.length;i++){
+    let pic= imgarray[i]
+    {
+        pics+=`
+        <div img src="${pic[0].src}">
             
-//         </div>`;
+        </div>`;
     
-//     document.getElementById("piccontainer").innerHTML=pics
-//     }
-// }
-// }
+    document.getElementById("piccontainer").innerHTML=pics
+    }
+}
+}
 
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -87,27 +83,41 @@ document.addEventListener("DOMContentLoaded", function (e) {
       if (resultObj.status === "ok") {
         prodinfoarray = resultObj.data;
         console.log(prodinfoarray);
+        imgarray = resultObj.data.images
+        console.log(imgarray)
         showproductinfo();
+        showpics();
       }})}
       )
-    //   document.addEventListener("DOMContentLoaded", function (e) {
-    //     let prodinfoURL= PRODUCT_INFO_URL + localStorage.getItem("prodID") + ".json"
-    //     getJSONData(prodinfoURL).then(function (resultObj) {
-    //       if (resultObj.status === "ok") {
-    //         imgarray = resultObj.data.images;
-    //         console.log(imgarray);
-    //         showpics();
-    //       }})}
-    //       )
+         document.addEventListener("DOMContentLoaded", function(e){
+        let comentsURL= PRODUCT_INFO_COMMENTS_URL + localStorage.getItem("prodID")+".json"
+        getJSONData(comentsURL).then(function(resultObj){
+            if(resultObj.status==="ok"){
+                prodcommentarray=resultObj.data
+                console.log(prodcommentarray)
+                showcomments();
+            }
+        })
+      })
 
+comentar.addEventListener("click",function(e){
+    let newcoments= ""
+    let punto = document.getElementById("punt");
+    let comentario= document.getElementById("opinion");
+    let user= localStorage.getItem("mail")
+    console.log(punto.value);
+    console.log(comentario);
+    newcoments+=`
+    <div>
+    <div class="row">
+    <div>
+        <p class="bold">${user}
+        <p>${punto.value}</p>
+    <p class="mb-1">${comentario}</p>
+</div>
+</div>
+</div>
+`;
+document.getElementById("newcom").innerHTML=newcoments;
 
-    //   document.addEventListener("DOMContentLoaded", function(e){
-    //     let comentsURL= PRODUCT_INFO_COMMENTS_URL + localStorage.getItem("prodID")+".json"
-    //     getJSONData(comentsURL).then(function(resultObj){
-    //         if(resultObj.status==="ok"){
-    //             prodcommentarray=resultObj.data
-    //             console.log(prodcommentarray)
-    //             showcomments();
-    //         }
-    //     })
-    //   })
+})
