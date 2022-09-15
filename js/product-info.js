@@ -54,7 +54,6 @@ function showcomments() {
       stars += `
             <p class="fa fa-star checked"></p>
             `;
-      console.log(stars);
     }
     for (let n = coment.score; n <5; n++) {
       starsn += `
@@ -67,37 +66,24 @@ function showcomments() {
             <div class="container" class="col-3" >
                 <p class="bold">${coment.user}
                 <small class="text-muted">${coment.dateTime}</small> </p>
-                <div id="">${stars}${starsn}</div>
+                <div>${stars}${starsn}</div>
                 <p class="mb-1">${coment.description}</p>
         </div>
        </div>
 </div>
 `;
-    // document.getElementById("papa").innerHTML = stars;
     document.getElementById("comentcontainer").innerHTML = coments;
   }
 }
 
-// function estrellitas(){
-//     let stars=""
-//     let e =prodcommentarray.length
-//     let s= 5
-//     while(e>0){
-//         e--
-//        stars+= `
-//        <p class=""fa fa-star checked"">a</p>
-//        `
-//        document.getElementById("stars").innerHTML=stars
-//        console.log(stars)
-//     }
-// }
+
 
 document.addEventListener("DOMContentLoaded", function (e) {
   let prodinfoURL = PRODUCT_INFO_URL + localStorage.getItem("prodID") + ".json";
   getJSONData(prodinfoURL).then(function (resultObj) {
     if (resultObj.status === "ok") {
       prodinfoarray = resultObj.data;
-      console.log(prodinfoarray);
+    //   console.log(prodinfoarray);
       showproductinfo();
     }
   });
@@ -108,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   getJSONData(comentsURL).then(function (resultObj) {
     if (resultObj.status === "ok") {
       prodcommentarray = resultObj.data;
-      console.log(prodcommentarray);
+    //   console.log(prodcommentarray);
       showcomments();
     }
   });
@@ -117,16 +103,27 @@ document.addEventListener("DOMContentLoaded", function (e) {
 comentar.addEventListener("click", function (e) {
   let newcoments = "";
   let punto = document.getElementById("punt").value;
-  let comentario = document.querySelector("opinion").value;
+  var comentario = document.getElementById("opinion").value;
   let user = localStorage.getItem("mail");
-  console.log(punto);
   console.log(comentario);
+  let stars = "";
+  let starsn = "";
+    for (let s = 0; s <punto; s++) {
+      stars += `
+            <p class="fa fa-star checked"></p>
+            `;
+    }
+    for (let n = punto; n <5; n++) {
+      starsn += `
+            <p class="fa fa-star"></p>
+            `;
+    }
   newcoments += `
     <div class="list-group-item list-group-item-action cursor-active">
     <div class="row">
     <div class="container" class="col-3">
         <p class="bold">${user}
-        <p>${punto}</p>
+        <p>${stars}${starsn}</p>
     <p class="mb-1">${comentario}</p>
 </div>
 </div>
