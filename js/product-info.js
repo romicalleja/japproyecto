@@ -3,6 +3,10 @@ let prodcommentarray = [];
 let imgarray = [];
 const comentar = document.getElementById("enviarcomentario");
 let puntosarray = [];
+const d = new Date();
+
+
+
 
 function showproductinfo() {
   let productsInfo = "";
@@ -123,6 +127,8 @@ comentar.addEventListener("click", function (e) {
     <div class="row">
     <div class="container" class="col-3">
         <p class="bold">${user}
+        <small class="text-muted">${d.toISOString()}</small> </p>
+    
         <p>${stars}${starsn}</p>
     <p class="mb-1">${comentario}</p>
 </div>
