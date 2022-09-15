@@ -37,23 +37,23 @@
       </div>
     </div>
   </nav>
-  <main class="pb-5 container" class="jumbotron-heading">
+  <main class="pb-5 container">
     <div class="container">
-         <div class="row">
-        <div class="list-group" id="prodinfocontainer" class="text-center p-4">
-
-        </div> 
-         <div id="piccontainer"></div>
-
+        <div class="container" id="prodinfocontainer"></div> 
+         <div id="piccontainer" class="row"></div>
+         <hr></hr>
+         <h4>Comentarios</h4>
         <div class="container" id="comentcontainer">
         </div>
-        <div class="container" id="newcom">
+            <div class="container" id="newcom">
         </div>
+        <div>
+          <form id="formcomment">
           <h4>
             Comentar
           </h4>
           <p>Tu Opinion:</p>
-          <textarea name="coment" id="Opinion"></textarea>
+          <textarea type="text" name="Opinion" id="Opinion"></textarea>
           <p>Tu Puntuacion:</p>
           <select name="puntajes" id="punt">
             <option value="1">1</option>
@@ -62,7 +62,9 @@
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <button id="enviarcomentario">Enviar</button>
+          <submit class="btn" id="enviarcomentario">Enviar</submit>
+          </form>
+          </div>
         </div>
       </div>
     </div>

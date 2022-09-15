@@ -93,6 +93,7 @@ footer p {
 
 .img-fit {
   max-height: 100%;
+  max-width: 100%;
 }
 
 .alert {
@@ -222,4 +223,17 @@ hr {
 
 .bold{
   font-weight: bold;
+}
+.col-1-4{
+  width:25%;
+  float:left;
+}
+.btn{
+  align-items: center;
+  padding: 6px 14px;
+    border-radius: 6px;
+  border: none;
+  color: black;
+  background-color: #53C0FB;
+  box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
 }
