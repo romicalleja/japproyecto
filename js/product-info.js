@@ -48,9 +48,7 @@ function showproductinfo() {
 }
 function showcomments() {
   let coments = "";
-  
-
-  for (let i = 0; i < prodcommentarray.length; i++) {
+    for (let i = 0; i < prodcommentarray.length; i++) {
     let coment = prodcommentarray[i];
     let stars = "";
   let starsn = "";

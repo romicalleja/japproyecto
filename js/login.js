@@ -27,3 +27,14 @@ addEventListener("submit", () => {
   }
 });
 
+
+// function onSignIn(googleUser) {
+//   var profile = googleUser.getBasicProfile();
+//   localStorage.setItem("mail", profile.getEmail)
+
+//   console.log('ID: ' + profile.getId());
+//   console.log('Name: ' + profile.getName());
+//   console.log('Image URL: ' + profile.getImageUrl());
+//   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+// }
+

@@ -6,7 +6,7 @@ let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 const busqueda= document.getElementById("busqueda")
-
+let src =document.getElementById("busqueda")
 
 function setproductid(id){
   localStorage.setItem("prodID", id);
@@ -50,10 +50,11 @@ function showProducts() {
         (minCount != undefined && parseInt(product.cost) >= minCount)) &&
       (maxCount == undefined ||
         (maxCount != undefined && parseInt(product.cost) <= maxCount))
-    ) {
+    ) 
+    {
       htmlContentToAppend += `
-        <div  onclick="setproductid(${product.id})"class="list-group-item list-group-item-action">
-            <div class="row">
+        <div id="search" onclick="setproductid(${product.id})"class="list-group-item list-group-item-action">
+            <div  class="row">
             <div class="col-3">
             <img src="${product.image}" alt="${
         product.description
@@ -139,14 +140,26 @@ document.addEventListener("DOMContentLoaded", function (e) {
     }
       
       showProducts();
-      
     });
-    input.addEventListener("input", function(e){
-      let value = e.target.value
-      event.preventDefault()
-      productsArray.forEach(product => {
-        const isVisible = product.name.includes(value) || product.description.includes(value)
-        product.classList.toggle("hide", !isVisible)
+    src.addEventListener("input", function(e){
+      for (let i = 0; i < productsArray.length; i++) {
+        let product = productsArray[i];
+      let value = src.value
+        const isVisible = product.name.includes(value) 
+        // || product.description.includes(value)
+        document.getElementById("search").classList.toggle("hide", !isVisible)
+        console.log(value)
+        showProducts()}
       });
-    })
 });
+   
+// src.addEventListener("input", function(e){
+//   for (let i = 0; i < productsArray.length; i++) {
+//     let product = productsArray[i];
+//   let value = src.value
+//     const isVisible = product.name.includes(value) 
+//     // || product.description.includes(value)
+//     document.getElementById("search").classList.toggle("hide", !isVisible)
+//     console.log(value)
+//     showProducts()}
+//   });
