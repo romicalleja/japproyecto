@@ -26,7 +26,10 @@ addEventListener("submit", () => {
  return alert("Verifique informacion");
   }
 });
-
+function onSignIn(googleUser) {
+  // get user profile information
+  console.log(googleUser.getBasicProfile())
+}
 
 // function onSignIn(googleUser) {
 //   var profile = googleUser.getBasicProfile();
