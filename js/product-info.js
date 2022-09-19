@@ -2,8 +2,8 @@ let prodinfoarray = [];
 let prodcommentarray = [];
 let imgarray = [];
 const comentar = document.getElementById("enviarcomentario");
-let puntosarray = [];
 const d = new Date();
+relatedarray=[];
 
 
 
@@ -46,6 +46,29 @@ function showproductinfo() {
     }
   }
 }
+
+function showrelatedprod(){
+  let htmlContentToAppend = "";
+
+  for (let i = 0; i < relatedarray.length; i++) {
+    let product = relatedarray[i];
+    
+      htmlContentToAppend += `
+        <div onclick="setproductid(${product.id})">
+            <div class="col-1-2">
+            <img id="img" src="${product.image}" alt="${product.name}" class="img-thumbnail">
+            <p>${product.name}</p>
+        </div>
+        </div>
+`;
+      document.getElementById("relatedprod").innerHTML = htmlContentToAppend;
+    }
+}
+function setproductid(id){
+  localStorage.setItem("prodID", id);
+  window.location = "product-info.html"
+}
+
 function showcomments() {
   let coments = "";
     for (let i = 0; i < prodcommentarray.length; i++) {
@@ -85,8 +108,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
   getJSONData(prodinfoURL).then(function (resultObj) {
     if (resultObj.status === "ok") {
       prodinfoarray = resultObj.data;
+      relatedarray= resultObj.data.relatedProducts
     //   console.log(prodinfoarray);
       showproductinfo();
+      showrelatedprod();
     }
   });
 });

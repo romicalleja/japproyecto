@@ -39,5 +39,4 @@ function onSignIn(googleUser) {
 location.href="inicial.html";
 localStorage.setItem("mail", profile.getEmail)
 }
-onSignIn(googleUser)
 

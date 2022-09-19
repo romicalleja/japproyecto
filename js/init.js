@@ -40,11 +40,22 @@ function getJSONData (url){
         return result;
     });
 }
-function showlocal(){
+function showusuario(){
   let htmlContentToAppend= "";
   htmlContentToAppend += `
-  (${localStorage.getItem("mail")})
+<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+${localStorage.getItem("mail")} </button>
+<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+  <li><a class="dropdown-item" href="cart.html">Mi Carrito</a></li>
+  <li><a class="dropdown-item" href="my-profile.html">Mi Perfil</a></li>
+  <li><a class="dropdown-item" id="logout" href="index.html">Cerrar session</a></li>
+</ul>
+</div>
   `
-  local.innerHTML=htmlContentToAppend
+  usuario.innerHTML=htmlContentToAppend
 } 
-showlocal()
+showusuario()
+
+logout.addEventListener("click", function(e){
+  localStorage.clear()
+})

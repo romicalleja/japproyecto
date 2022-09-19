@@ -228,3 +228,7 @@ hr {
   width:25%;
   float:left;
 }
+.col-1-2{
+  width: 50%;
+  float: left;
+}
