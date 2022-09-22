@@ -30,11 +30,30 @@ function showproductinfo() {
         <p class="bold">${"Cantidad de Vendidos"}</p>
         <p>${info.soldCount}</p>
         <p class="bold">${"Imagenes ilustrativas"}
-        <div class="col-1-4"><img class="img-fit" src=${info.images[0]}></div>
-        <div class="col-1-4"><img class="img-fit" src=${info.images[1]}></div>
-        <div class="col-1-4"><img class="img-fit" src=${info.images[2]}></div>
-        <div class="col-1-4"><img class="img-fit" src=${info.images[3]}></div>
-        </div>
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+     <img src=${info.images[0]} class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+    <img src=${info.images[1]} class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+    <img src=${info.images[2]} class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+    <img src=${info.images[3]} class="d-block w-100">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
         <div>
         </div>
     </div>
