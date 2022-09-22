@@ -29,9 +29,10 @@ addEventListener("submit", () => {
 
 
 function onSignIn(googleUser) {
-  localStorage.setItem("mail", profile.getEmail)
+  event.preventDefault()
   location.href="inicial.html";
   var profile = googleUser.getBasicProfile();
+  localStorage.setItem("mail", profile.getEmail)
   console.log(googleUser.getBasicProfile())
   console.log('ID: ' + profile.getId());
   console.log('Name: ' + profile.getName());
