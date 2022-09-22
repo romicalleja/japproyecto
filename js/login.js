@@ -30,7 +30,7 @@ addEventListener("submit", () => {
 
 function onSignIn(googleUser) {
   event.preventDefault()
-  location.href="inicial.html";
+  window.location="inicial.html";
   var profile = googleUser.getBasicProfile();
   localStorage.setItem("mail", profile.getEmail)
   console.log(googleUser.getBasicProfile())
@@ -40,4 +40,5 @@ function onSignIn(googleUser) {
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
 }
+onSignIn(googleUser)
 
