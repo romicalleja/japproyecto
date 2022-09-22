@@ -3,10 +3,7 @@ let prodcommentarray = [];
 let imgarray = [];
 const comentar = document.getElementById("enviarcomentario");
 const d = new Date();
-relatedarray=[];
-
-
-
+relatedarray = [];
 
 function showproductinfo() {
   let productsInfo = "";
@@ -66,13 +63,13 @@ function showproductinfo() {
   }
 }
 
-function showrelatedprod(){
+function showrelatedprod() {
   let htmlContentToAppend = "";
 
   for (let i = 0; i < relatedarray.length; i++) {
     let product = relatedarray[i];
-    
-      htmlContentToAppend += `
+
+    htmlContentToAppend += `
         <div onclick="setproductid(${product.id})">
             <div class="col-1-2">
             <img id="img" src="${product.image}" alt="${product.name}" class="img-thumbnail">
@@ -80,26 +77,26 @@ function showrelatedprod(){
         </div>
         </div>
 `;
-      document.getElementById("relatedprod").innerHTML = htmlContentToAppend;
-    }
+    document.getElementById("relatedprod").innerHTML = htmlContentToAppend;
+  }
 }
-function setproductid(id){
+function setproductid(id) {
   localStorage.setItem("prodID", id);
-  window.location = "product-info.html"
+  window.location = "product-info.html";
 }
 
 function showcomments() {
   let coments = "";
-    for (let i = 0; i < prodcommentarray.length; i++) {
+  for (let i = 0; i < prodcommentarray.length; i++) {
     let coment = prodcommentarray[i];
     let stars = "";
-  let starsn = "";
-    for (let s = 0; s <coment.score; s++) {
+    let starsn = "";
+    for (let s = 0; s < coment.score; s++) {
       stars += `
             <p class="fa fa-star checked"></p>
             `;
     }
-    for (let n = coment.score; n <5; n++) {
+    for (let n = coment.score; n < 5; n++) {
       starsn += `
             <p class="fa fa-star"></p>
             `;
@@ -120,15 +117,13 @@ function showcomments() {
   }
 }
 
-
-
 document.addEventListener("DOMContentLoaded", function (e) {
   let prodinfoURL = PRODUCT_INFO_URL + localStorage.getItem("prodID") + ".json";
   getJSONData(prodinfoURL).then(function (resultObj) {
     if (resultObj.status === "ok") {
       prodinfoarray = resultObj.data;
-      relatedarray= resultObj.data.relatedProducts
-    //   console.log(prodinfoarray);
+      relatedarray = resultObj.data.relatedProducts;
+      //   console.log(prodinfoarray);
       showproductinfo();
       showrelatedprod();
     }
@@ -140,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   getJSONData(comentsURL).then(function (resultObj) {
     if (resultObj.status === "ok") {
       prodcommentarray = resultObj.data;
-    //   console.log(prodcommentarray);
+      //   console.log(prodcommentarray);
       showcomments();
     }
   });
@@ -154,16 +149,16 @@ comentar.addEventListener("click", function (e) {
   console.log(comentario);
   let stars = "";
   let starsn = "";
-    for (let s = 0; s <punto; s++) {
-      stars += `
+  for (let s = 0; s < punto; s++) {
+    stars += `
             <p class="fa fa-star checked"></p>
             `;
-    }
-    for (let n = punto; n <5; n++) {
-      starsn += `
+  }
+  for (let n = punto; n < 5; n++) {
+    starsn += `
             <p class="fa fa-star"></p>
             `;
-    }
+  }
   newcoments += `
     <div class="list-group-item list-group-item-action cursor-active">
     <div class="row">
