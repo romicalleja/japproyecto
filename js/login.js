@@ -40,5 +40,8 @@ function onSignIn(googleUser) {
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
 }
-onSignIn(googleUser)
-
+function onSuccess(googleUser) {
+  console.log('Logged in as: ' + googleUser.getBasicProfile().getName());     
+  window.location="inicial.html";
+   
+}
