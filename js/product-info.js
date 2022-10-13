@@ -14,7 +14,7 @@ function showproductinfo() {
       productsInfo += `
         
     <div class="container">
-            <h2>${info.name}</h2>
+            <h2 class="float-start">${info.name}</h2> <button class="float-end">COMPRAR</button>
              </div>
              <hr></hr>
             <div>
@@ -119,6 +119,7 @@ function showcomments() {
 
 document.addEventListener("DOMContentLoaded", function (e) {
   let prodinfoURL = PRODUCT_INFO_URL + localStorage.getItem("prodID") + ".json";
+  let comentsURL =PRODUCT_INFO_COMMENTS_URL + localStorage.getItem("prodID") + ".json";
   getJSONData(prodinfoURL).then(function (resultObj) {
     if (resultObj.status === "ok") {
       prodinfoarray = resultObj.data;
@@ -128,10 +129,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
       showrelatedprod();
     }
   });
-});
-document.addEventListener("DOMContentLoaded", function (e) {
-  let comentsURL =
-    PRODUCT_INFO_COMMENTS_URL + localStorage.getItem("prodID") + ".json";
   getJSONData(comentsURL).then(function (resultObj) {
     if (resultObj.status === "ok") {
       prodcommentarray = resultObj.data;

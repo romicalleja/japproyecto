@@ -231,4 +231,18 @@ hr {
 .col-1-2{
   width: 50%;
   float: left;
+  padding: 2px;
+}
+
+.colenv{
+  width: 45%;
+  float: left;
+}
+.float-start{
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+.float-end{
+  margin-top: 5%;
+  margin-bottom: 2%;
 }

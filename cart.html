@@ -37,11 +37,46 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
+    <div id="title"></div>
+    <table id="shoppingCart" class="table table-condensed table-responsive container">
+      <thead>
+          <tr>
+              <th style="width:60%">Producto</th>
+              <th style="width:12%">Costo</th>
+              <th style="width:10%">Cantidad</th>
+              <th style="width:16%">Subtotal</th>
+          </tr>
+      </thead>
+      <tbody id="carrito">
+        </tbody>
+    </table>
+    <!-- <div class="container" id="carrito"> -->
+      <!-- <div class="alert alert-danger text-center" role="alert">
         <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+      </div> -->
     </div>
+    <br></br>
+    <div class="container"id="envio">
+      <h4>Tipo de envio</h4>
+     <form>
+  <input type="radio" id="premium" name="envio">
+  <label for="premium">Premium 2 a 5 días (15%)</label><br>
+  <input type="radio" id="express" name="envio" >
+  <label for="express">Express 5 a 8 días (7%)</label><br>
+  <input type="radio" id="standard" name="envio" >
+  <label for="standard">Standard 12 a 15 días (5%)</label>
+</form>
+<h4>Dirección de envio</h4>
+<form>
+  <label for="Calle" class="colenv" >Calle</label>
+   <label for="numero" class="colenv" >Número</label><br>
+  <input type="text" id="Calle" name="Calle" class="colenv">
+   <input type="numero" id="numero" name="numero" class="colenv" ><br>
+  <label for="esquina" class="colenv" >Esquina</label><br>
+  <input class="colenv" type="esquina" id="esquina" name="esquina">
+</form>
+    </div>
+  <br></br>
   </main>
   <footer class="text-muted">
     <div class="container">
