@@ -39,38 +39,34 @@ function showcart() {
                             </td>
                             <td data-th="Costo">${compra.currency} ${compra.unitCost}</td>
                             <td data-th="Count">
-                                <input type="number" class="form-control form-control-lg text-center" id="count" min="1" max="5">
+                                <input type="number" oninput="subtotal(value, ${compra.unitCost}, ${localStorage.setItem("dolar", compra.currency)} )" class="form-control form-control-lg text-center" id="count" min="1" max="5" placeholder="${compra.count}">
                             </td>
                             <td class="actions" data-th="Subtotal" id="cantidad">
+                            ${compra.currency} ${compra.unitCost}
                             </td>
-                        </tr>
-                       
-    </section>
-`;
-
+                            `;
+                            
       document.getElementById("carrito").innerHTML = cart;
       document.getElementById("title").innerHTML = title;
     }
   }
 }
 
-let count= document.getElementById("count")
+function subtotal(value , compra){
+  let subtotal="";
 
-count.addEventListener("input", function(e){
-    let subtotal=""
-    subtotalmul=""
-    for (let i = 0; i < cartarray.length; i++) {
-        let compra = cartarray[i];
-    
-    let subtotalmul = document.getElementById("count")*compra.unitCost;
-subtotal += `
-<div class="text-right">
-  <p>${compra.currency}${subtotalmul}}</p>
-</div>
+                            let subtotalmul = value*compra;                                                
+                            console.log(subtotalmul)
+                            subtotal=`
+                            <td class="actions" data-th="Subtotal" id="cantidad">
+                            ${localStorage.getItem("dolar")}
+                            ${subtotalmul}
+                            </td>
+                        </tr>
+                       
+    </section>
 `;
-
-document.getElementById("cantidad").innerHTML = subtotalmul;
-    }
-})
+document.getElementById("cantidad").innerHTML=subtotal
+}
 
 
