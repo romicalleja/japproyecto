@@ -1,4 +1,8 @@
 let cartarray = [];
+let standard= document.getElementById("standard")
+let express= document.getElementById("express")
+let premium= document.getElementById("premium")
+
 
 document.addEventListener("DOMContentLoaded", function (e) {
   getJSONData(CART_INFO_URL + "25801.json").then(function (resultObj) {
@@ -67,6 +71,43 @@ function subtotal(value , compra){
     </section>
 `;
 document.getElementById("cantidad").innerHTML=subtotal
+
+if (standard.Checked){ total(100, 5)
+} else if(express.Checked){
+  total(100, 7)
+} else if (premium.Checked){
+  total(100, 15)
+} else{
+  total(100, 1)
 }
 
+}
 
+// function envio(total){
+//   if (standard.Checked){ total(total, 5)
+//   } else if(express.Checked){
+//     total(total, 7)
+//   } else if (premium.Checked){
+//     total(total, 15)
+//   }
+//   }
+
+function total(total, envio){
+
+  
+  let costos=""
+  console.log("working")
+  costos=`
+  <h3>Costos</h3>
+  <div class="container">
+  <div>
+  Subtotal ${total}
+  </div>
+  <div>
+  Envio ${(total/100)*envio}
+  </div>
+  </div>
+  `
+
+  document.getElementById("costos").innerHTML=costos
+}

@@ -5,6 +5,8 @@ const comentar = document.getElementById("enviarcomentario");
 const d = new Date();
 relatedarray = [];
 
+
+
 function showproductinfo() {
   let productsInfo = "";
   {
