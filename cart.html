@@ -50,20 +50,16 @@
       <tbody id="carrito">
         </tbody>
     </table>
-    <!-- <div class="container" id="carrito"> -->
-      <!-- <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div> -->
     </div>
     <br></br>
     <div class="container"id="envio">
       <h4>Tipo de envio</h4>
      <form>
-  <input type="radio" id="premium" name="envio">
+  <input type="radio" id="premium" name="envio" onclick="costoenvio(15)">
   <label for="premium">Premium 2 a 5 días (15%)</label><br>
-  <input type="radio" id="express" name="envio" >
+  <input type="radio" id="express" name="envio" onclick="costoenvio(7)">
   <label for="express">Express 5 a 8 días (7%)</label><br>
-  <input type="radio" id="standard" name="envio" >
+  <input type="radio" id="standard" name="envio" onclick="costoenvio(5)">
   <label for="standard">Standard 12 a 15 días (5%)</label>
 </form>
 <h4>Dirección de envio</h4>
@@ -81,6 +77,51 @@
 <div id="costos" class="container"></div>
     </div>
   <br></br>
+<div class="container">
+<h4>Metodo De Pago</h4>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target=".bd-example">Seleccionar</button>
+
+<div class="modal fade bd-example" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Metodo de Pago</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <h6><input type="radio" id="credito" name="pago" onclick="enable(id)">
+  <label for="credito">Tarjeta de crédito</label></h6>
+  <hr>
+  <form id=" formcredito">
+    <label for="codigo" class="col-1-2">Codigo Seg</label> 
+    <label for="vencimiento" class="col-1-2">Vencimiento(MM/AA)</label>
+    <br>
+    <input type="codigo" id="codigo" name="codigo" class="col-1-2">
+    <input type="Vencimiento" id="vencimiento" name="vencimiento" class="col-1-2"><br>
+    
+    <label for="Tarjeta">Tarjeta</label><br>
+    <input type="tarjeta" id="tarjeta" name="tarjeta">
+  </form>
+  <hr>
+ <h6><input type="radio" id="transferencia" name="pago" onclick="enable(id)">
+  <label for="transferencia">Transferencia bancaria</label></h6>
+  <label for="cuenta">Numero de Cuenta</label><br>
+  <input type="cuenta" id="cuenta" name="cuanta">
+  <hr>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="pago()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <button type="button" class="btn btn-primary" onclick="finalizar()">Finalizar Compra</button>
+</div>
+<div id="alert" class="float-start">
+
+</div>
   </main>
   <footer class="text-muted">
     <div class="container">

@@ -1,8 +1,9 @@
 let cartarray = [];
-let standard= document.getElementById("standard")
-let express= document.getElementById("express")
-let premium= document.getElementById("premium")
-
+const modalpago = document.getElementById("modalpago");
+let codigo= document.getElementById("codigo")
+let tarjeta=document.getElementById("tarjeta")
+let vencimiento= document.getElementById("vencimiento")
+let cuenta=document.getElementById("cuenta")
 
 document.addEventListener("DOMContentLoaded", function (e) {
   getJSONData(CART_INFO_URL + "25801.json").then(function (resultObj) {
@@ -34,34 +35,51 @@ function showcart() {
                             <td data-th="Producto">
                                 <div class="row">
                                     <div class="col-md-3 text-left">
-                                        <img src="${compra.image}" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                        <img src="${
+                                          compra.image
+                                        }" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
                                     </div>
                                     <div class="col-md-9 text-left mt-sm-2">
                                        <h4>${compra.name}</h4>
                                     </div>
                                 </div>
                             </td>
-                            <td data-th="Costo">${compra.currency} ${compra.unitCost}</td>
+                            <td data-th="Costo">${compra.currency} ${
+        compra.unitCost
+      }</td>
                             <td data-th="Count">
-                                <input type="number" oninput="subtotal(value, ${compra.unitCost}, ${localStorage.setItem("dolar", compra.currency)} )" class="form-control form-control-lg text-center" id="count" min="1" max="5" placeholder="${compra.count}">
+                                <input type="number" oninput="subtotal(value, ${
+                                  compra.unitCost
+                                }, ${localStorage.setItem(
+        "dolar",
+        compra.currency
+      )} )" class="form-control form-control-lg text-center" id="count" min="1" max="5" placeholder="${
+        compra.count
+      }">
                             </td>
                             <td class="actions" data-th="Subtotal" id="cantidad">
                             ${compra.currency} ${compra.unitCost}
                             </td>
                             `;
-                            
+
       document.getElementById("carrito").innerHTML = cart;
       document.getElementById("title").innerHTML = title;
     }
+    total(compra.unitCost, localStorage.getItem("costoenvio"));
   }
 }
 
-function subtotal(value , compra){
-  let subtotal="";
+function costoenvio(costoenvio) {
+  localStorage.setItem("costoenvio", costoenvio);
+  total(localStorage.getItem("subtotal"), localStorage.getItem("costoenvio"));
+}
 
-                            let subtotalmul = value*compra;                                                
-                            console.log(subtotalmul)
-                            subtotal=`
+function subtotal(value, compra) {
+  let subtotal = "";
+
+  let subtotalmul = value * compra;
+  console.log(subtotalmul);
+  subtotal = `
                             <td class="actions" data-th="Subtotal" id="cantidad">
                             ${localStorage.getItem("dolar")}
                             ${subtotalmul}
@@ -70,44 +88,70 @@ function subtotal(value , compra){
                        
     </section>
 `;
-document.getElementById("cantidad").innerHTML=subtotal
+  document.getElementById("cantidad").innerHTML = subtotal;
 
-if (standard.Checked){ total(100, 5)
-} else if(express.Checked){
-  total(100, 7)
-} else if (premium.Checked){
-  total(100, 15)
-} else{
-  total(100, 1)
+  localStorage.setItem("subtotal", subtotalmul);
+  total(subtotalmul, localStorage.getItem("costoenvio"));
 }
 
-}
+function total(subtotal, envio) {
+  let envios = (subtotal / 100) * envio;
+  let total = subtotal + envios;
+  console.log(localStorage.getItem("costoenvio"));
 
-// function envio(total){
-//   if (standard.Checked){ total(total, 5)
-//   } else if(express.Checked){
-//     total(total, 7)
-//   } else if (premium.Checked){
-//     total(total, 15)
-//   }
-//   }
-
-function total(total, envio){
-
-  
-  let costos=""
-  console.log("working")
-  costos=`
+  let costos = "";
+  costos = `
   <h3>Costos</h3>
-  <div class="container">
   <div>
-  Subtotal ${total}
+  <div class="list-group-item">
+ Subtotal:USD ${subtotal}
   </div>
-  <div>
-  Envio ${(total/100)*envio}
+  <div class="list-group-item">
+  Envio: 
+  USD ${envios}
+  </div>
+  <div class="list-group-item">
+  Total:
+   USD ${total}
   </div>
   </div>
+
+  `;
+
+  document.getElementById("costos").innerHTML = costos;
+}
+
+function enable(cual){
+  console.log(cual)
+  localStorage.setItem("pago", cual)
+  if (cual = transferencia){
+    cuenta.disabled= false
+    tarjeta.disabled=true
+    codigo.disabled=true
+    vencimiento.disabled= true
+  }
+  else if(cual = credito){
+    cuenta.disabled= true
+    tarjeta.disabled=false
+    codigo.disabled=false
+    vencimiento.disabled= false
+  }
+}
+
+function pago(){
+  let pago= localStorage.getItem("pago")
+  if (pago= transferencia && codigo.length>>0 ){
+  }
+  localStorage.setItem("someting", "something")
+}
+
+function finalizar(){
+  let alerta= ""
+
+  alerta +=`
+  <div class="alert alert-success" role="alert">
+  Compra completada con exito!
   `
 
-  document.getElementById("costos").innerHTML=costos
+ document.getElementById("alert").innerHTML=alerta
 }
