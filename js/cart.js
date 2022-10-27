@@ -28,6 +28,7 @@ function showcart() {
               <i class="text-info font-weight-bold">${cartarray.length}</i> productos en tu carro de compras</p>
               `;
   for (let i = 0; i < cartarray.length; i++) {
+    
     let compra = cartarray[i];
     {
       cart += `
@@ -48,14 +49,8 @@ function showcart() {
         compra.unitCost
       }</td>
                             <td data-th="Count">
-                                <input type="number" oninput="subtotal(value, ${
-                                  compra.unitCost
-                                }, ${localStorage.setItem(
-        "dolar",
-        compra.currency
-      )} )" class="form-control form-control-lg text-center" id="count" min="1" max="5" placeholder="${
-        compra.count
-      }">
+                                <input type="number" oninput="subtotal(value, ${compra.unitCost}, ${localStorage.setItem("dolar",compra.currency)})"
+                                 class="form-control form-control-lg text-center" id="count" min="1" max="5" placeholder="${compra.count}">
                             </td>
                             <td class="actions" data-th="Subtotal" id="cantidad">
                             ${compra.currency} ${compra.unitCost}
@@ -65,13 +60,13 @@ function showcart() {
       document.getElementById("carrito").innerHTML = cart;
       document.getElementById("title").innerHTML = title;
     }
-    total(compra.unitCost, localStorage.getItem("costoenvio"));
+    total(localStorage.getItem("costoenvio"));
   }
 }
 
 function costoenvio(costoenvio) {
   localStorage.setItem("costoenvio", costoenvio);
-  total(localStorage.getItem("subtotal"), localStorage.getItem("costoenvio"));
+  total(localStorage.getItem("costoenvio"));
 }
 
 function subtotal(value, compra) {
@@ -91,13 +86,14 @@ function subtotal(value, compra) {
   document.getElementById("cantidad").innerHTML = subtotal;
 
   localStorage.setItem("subtotal", subtotalmul);
-  total(subtotalmul, localStorage.getItem("costoenvio"));
+  total(localStorage.getItem("costoenvio"));
 }
 
-function total(subtotal, envio) {
+function total(envio) {
+  let subtotal= localStorage.getItem("subtotal")
   let envios = (subtotal / 100) * envio;
-  let total = subtotal + envios;
-  console.log(localStorage.getItem("costoenvio"));
+  let total = Number(subtotal)+Number(envios);
+  // console.log(localStorage.getItem("costoenvio"));
 
   let costos = "";
   costos = `
@@ -140,12 +136,20 @@ function enable(cual){
 
 function pago(){
   let pago= localStorage.getItem("pago")
-  if (pago= transferencia && codigo.length>>0 ){
+  if (codigo.length>>0 && tarjeta.length>>0 && vencimiento.length>>0){
+    console.log(codigo.length)
+    localStorage.setItem("pagocompleto", "si")
   }
-  localStorage.setItem("someting", "something")
+  else if (cuenta.length>>0){
+    localStorage.setItem("pagocompleto", "si")
+  }
+  localStorage.setItem("pagocompleto", "no")
 }
 
 function finalizar(){
+  pago()
+  let pagocompleto= localStorage.getItem("pagocompleto")
+  if (pagocompleto= "si"){
   let alerta= ""
 
   alerta +=`
@@ -154,4 +158,16 @@ function finalizar(){
   `
 
  document.getElementById("alert").innerHTML=alerta
+ console.log(alerta)
+}
+else{
+  let alerta= ""
+
+  alerta +=`
+  <div class="alert alert-danger" role="alert">
+Complete los datos  `
+
+ document.getElementById("alert").innerHTML=alerta
+
+}
 }
