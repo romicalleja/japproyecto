@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
   getJSONData(CART_INFO_URL + "25801.json").then(function (resultObj) {
     if (resultObj.status === "ok") {
       cartarray = resultObj.data.articles;
-      console.log(cartarray);
       showcart();
     }
   });
@@ -73,7 +72,6 @@ function subtotal(value, compra) {
   let subtotal = "";
 
   let subtotalmul = value * compra;
-  console.log(subtotalmul);
   subtotal = `
                             <td class="actions" data-th="Subtotal" id="cantidad">
                             ${localStorage.getItem("dolar")}
@@ -93,7 +91,6 @@ function total(envio) {
   let subtotal= localStorage.getItem("subtotal")
   let envios = (subtotal / 100) * envio;
   let total = Number(subtotal)+Number(envios);
-  // console.log(localStorage.getItem("costoenvio"));
 
   let costos = "";
   costos = `
@@ -117,39 +114,48 @@ function total(envio) {
   document.getElementById("costos").innerHTML = costos;
 }
 
-function enable(cual){
-  console.log(cual)
-  localStorage.setItem("pago", cual)
-  if (cual = transferencia){
-    cuenta.disabled= false
-    tarjeta.disabled=true
-    codigo.disabled=true
-    vencimiento.disabled= true
-  }
-  else if(cual = credito){
+function enablecredito(){
     cuenta.disabled= true
     tarjeta.disabled=false
     codigo.disabled=false
     vencimiento.disabled= false
-  }
+    localStorage.setItem("pago", "credito")
+}
+function enabletransferencia(){
+  cuenta.disabled= false
+  tarjeta.disabled=true
+  codigo.disabled=true
+  vencimiento.disabled= true
+  localStorage.setItem("pago", "transferencia")
 }
 
 function pago(){
   let pago= localStorage.getItem("pago")
-  if (codigo.length>>0 && tarjeta.length>>0 && vencimiento.length>>0){
-    console.log(codigo.length)
+  if (pago="credito"){
+    console.log(codigo.value.length)
+    if(codigo.value.length>>0 && tarjeta.value.length>>0 && vencimiento.value.length>>0){
     localStorage.setItem("pagocompleto", "si")
+    console.log("1")
+    }
   }
-  else if (cuenta.length>>0){
+  else if (pago="transferencia" && cuenta.value.length>>0){
     localStorage.setItem("pagocompleto", "si")
+    console.log("2")
   }
-  localStorage.setItem("pagocompleto", "no")
+  else{
+  localStorage.setItem("pagocompleto", "no")}
+  console.log(localStorage.getItem("pagocompleto"))
 }
 
 function finalizar(){
   pago()
   let pagocompleto= localStorage.getItem("pagocompleto")
+  let form= document.getElementById("Formadress")
+  console.log(form)
   if (pagocompleto= "si"){
+    // document.getElementById("calle")
+    // document.getElementById("esquina")
+    // document.getElementById("numero")
   let alerta= ""
 
   alerta +=`
@@ -158,7 +164,6 @@ function finalizar(){
   `
 
  document.getElementById("alert").innerHTML=alerta
- console.log(alerta)
 }
 else{
   let alerta= ""

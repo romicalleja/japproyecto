@@ -63,13 +63,13 @@
   <label for="standard">Standard 12 a 15 días (5%)</label>
 </form>
 <h4>Dirección de envio</h4>
-<form>
+<form id="Formadress">
   <label for="Calle" class="colenv" >Calle</label>
    <label for="numero" class="colenv" >Número</label><br>
-  <input type="text" id="Calle" name="Calle" class="colenv">
-   <input type="numero" id="numero" name="numero" class="colenv" ><br>
+  <input type="text" id="Calle" name="Calle" class="colenv" required>
+   <input type="numero" id="numero" name="numero" class="colenv" required ><br>
   <label for="esquina" class="colenv" >Esquina</label><br>
-  <input class="colenv" type="esquina" id="esquina" name="esquina">
+  <input class="colenv" type="esquina" id="esquina" name="esquina" required>
 </form>
 <br>
 <br>
@@ -79,7 +79,7 @@
   <br></br>
 <div class="container">
 <h4>Metodo De Pago</h4>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target=".bd-example">Seleccionar</button>
+<button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target=".bd-example">Seleccionar metodo de pago</button>
 
 <div class="modal fade bd-example" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -89,7 +89,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       <h6><input type="radio" id="credito" name="pago" onclick="enable(id)">
+       <h6><input type="radio" id="credito" name="pago" onclick="enablecredito()">
   <label for="credito">Tarjeta de crédito</label></h6>
   <hr>
   <form id=" formcredito">
@@ -103,7 +103,7 @@
     <input type="tarjeta" id="tarjeta" name="tarjeta">
   </form>
   <hr>
- <h6><input type="radio" id="transferencia" name="pago" onclick="enable(id)">
+ <h6><input type="radio" id="transferencia" name="pago" onclick="enabletransferencia()">
   <label for="transferencia">Transferencia bancaria</label></h6>
   <label for="cuenta">Numero de Cuenta</label><br>
   <input type="cuenta" id="cuenta" name="cuanta">
@@ -117,11 +117,11 @@
   </div>
 </div>
 <div>
-  <button type="button" class="btn btn-primary" onclick="finalizar()">Finalizar Compra</button>
+  <button type="button" class="btn btn-primary align-self-center" onclick="finalizar()">Finalizar Compra</button>
 </div>
 <div id="alert" class="float-start">
 
-</div>
+</div> 
   </main>
   <footer class="text-muted">
     <div class="container">
