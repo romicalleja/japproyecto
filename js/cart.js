@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 });
 
 function showcart() {
+  costoenvio(0)
   let cart = "";
   let title = "";
   title += `
